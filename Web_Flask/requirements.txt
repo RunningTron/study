@@ -1,0 +1,10 @@
+click==7.1.2
+Flask==1.1.2
+gpg==1.10.0
+iniparse==0.4
+itsdangerous==1.1.0
+Jinja2==2.11.2
+MarkupSafe==1.1.1
+rpm==4.14.2
+six==1.11.0
+Werkzeug==1.0.1

@@ -1,0 +1,2 @@
+SESSION_KEY="^123#"
+MD5_SALT="!@#%"

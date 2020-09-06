@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+</head>
+<body>
+
+<dev class="container-fluid" width="50%">
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="username" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="username" placeholder="用户名" name="username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="pwd" class="col-sm-2 control-label">密码</label>
+            <div class="col-sm-10">
+                <input type="password" class="form-control" id="pwd" placeholder="密码" name="pwd">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default" id="submit">Sign in</button>
+            </div>
+        </div>
+    </form>
+</dev>
+
+</body>
+
+<script src="/static/js/jquery-3.4.1.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script>
+    $('#submit').click(function () {
+        var username = $('[name = username]').val();
+        var pwd = $('[name = pwd]').val();
+        $.ajax({
+            url: "/login",
+            type: 'post',
+            data: {'username': username, 'pwd': pwd},
+            success: function (ret) {
+
+                console.log(location.search.slice(6));
+                if (ret.status = 200) {
+                    clearTimeout(setTimeout(alert(ret.data), 1000));
+                    var next_path = "/home";
+                    console.log(next_path);
+                    if (ret.next_path) {
+                        next_path = ret.next_path
+                    }
+                    location.href = next_path
+
+                }
+                else {
+                    console.log(ret.status, ret.msg)
+                }
+            }
+        })
+    })
+    ;
+
+
+</script>
+
+</html>

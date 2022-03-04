@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>节流</title>
+</head>
+<body>
+
+<div id="div_1"></div>
+
+</body>
+<style>
+    #div_1 {
+        width: 200px;
+        height: 200px;
+        background-color: aqua;
+    }
+</style>
+<script>
+    let div_1 = document.getElementById("div_1")
+    console.log('div_1', div_1)
+    div_1.addEventListener("mousemove", jieliu2(handler, 2000))
+
+    function handler() {
+        console.log('handler')
+    }
+
+    // 立即执行 缺点: 最后一次操作未执行
+    function jieliu2(fn, interval) {
+        let timer = false
+        return () => {
+            if (!timer) {
+                fn()
+                timer = true
+                setTimeout(() => {
+                    timer = false
+                }, interval)
+            }
+        }
+    }
+
+    // 缺点 延迟执行
+    function jieliu(fn, interval) {
+        let timer = Date.now();
+        return () => {
+            if ((Date.now() - timer) > interval) {
+                fn()
+                timer = Date.now()
+            }
+        }
+
+    }
+
+</script>
+</html>

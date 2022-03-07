@@ -282,6 +282,39 @@ https://www.cnblogs.com/polk6/p/5154470.html
 
 
 
+#### 浏览器渲染规则
+
+https://blog.csdn.net/ysterling/article/details/86514136
+
+https://www.cnblogs.com/slly/p/6640761.html
+
+```txt
+1.解析HTML生成DOM树
+2.解析CSS生成CSSOM规则树
+3.将DOM树与CSSOM规则树合并在一起生成渲染树
+4.遍历渲染树开始布局，计算每个节点的位置大小信息
+5.将渲染树每个节点绘制到屏幕
+```
+
+**reflow和repaint**
+
+```txt
+repaint:屏幕的一部分重画，不影响整体布局 元素的几何尺寸和位置不变。
+
+reflow:意味着元件的几何尺寸变了，我们需要重新验证并计算渲染树。是渲染树的一部分或全部发生了变化
+
+display:none 会触发reflow
+visibility:hidden 只会触发repaint，
+
+有些情况，比如修改了元素的样式，浏览器并不会立刻reflow或repaint一次，而是会把这样的操作积攒一批，然后做一个reflow，这又叫做异步reflow或增量异步reflow
+
+有些情况，比如resize窗口，改变了页面默认的字体等，对于这些操作，浏览器会马上进行relow
+```
+
+
+
+
+
 ### vue
 
 ​	vue3响应原理proxy
@@ -289,6 +322,77 @@ https://www.cnblogs.com/polk6/p/5154470.html
 ​	生命周期
 
 ​	this指向
+
+
+
+#### :is用法
+
+1. 解决了html模板的限制
+
+2. <component> + is 的骚操作
+
+   ```vue
+   // 控制componentName 控制组件切换
+   <component :is="componentName"></component>
+   ```
+
+   
+
+#### 
+
+#### 创建组件的方式
+
+1. Vue.extend 来创建全局的Vue组件
+2. 使用 Vue.component 创建局部组件
+
+
+
+模板类型:
+
+   1.模板组件
+
+2. 函数组件(render函数)
+
+#### keep-alive
+
+vue的内置组件,把一些不常变动的组件或者需要缓存的组件用`<keep-alive>`包裹起来，这样`<keep-alive>`就会帮我们把组件保存在内存中，而不是直接的销毁，这样做可以保留组件的状态或避免多次重新渲染，以提高页面性能。
+
+用法:
+
+- `include` - 字符串或正则表达式。只有名称匹配的组件会被缓存。
+
+- `exclude` - 字符串或正则表达式。任何名称匹配的组件都不会被缓存。
+
+- `max` - 数字。最多可以缓存多少组件实例。 (淘汰策略LRU)
+
+  LRU（**Least recently used**，最近最少使用）算法根据数据的历史访问记录来进行淘汰数据，其核心思想是“如果数据最近被访问过，那么将来被访问的几率也更高”
+
+原理:
+
+```txt
+this.keys // 缓存组件的key
+this.cache // 缓存的组件 {keyName:component}
+```
+
+主要是render函数
+
+```txt
+命中缓存:
+
+ 	1. 直接从缓存中拿 vnode 的组件实例 
+ 	2. 将数据移到`this.keys`的尾部 (删除this.keys中此组件的key,然后再尾部插入此key)
+
+没有命中缓存:
+    1. this.cache中 缓存下来此组件 cache[key] = vnode
+    2. 将新数据从尾部插入到`this.keys`中；
+    3. 当`this.keys`满的时候，将头部的数据丢弃；
+
+以上工作做完后设置 `vnode.data.keepAlive = true` ，最后将`vnode`返回。
+```
+
+activated和deactivated 两个钩子函数
+
+​	它的执行时机是 `<keep-alive>` 包裹的组件激活时调用和停用时调用
 
 
 

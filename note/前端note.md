@@ -323,9 +323,28 @@ visibility:hidden 只会触发repaint，
 
 ​	this指向
 
+vue-loader
+
+##### 组件加载渲染过程
+
+```txt
+父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父 mounted
+
+子组件更新过程：
+父 beforeUpdate -> 子 beforeUpdate -> 子 updated -> 父 updated
+
+父组件更新过程：
+父 beforeUpdate -> 父 updated
+
+销毁过程：
+父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
+```
 
 
-#### :is用法
+
+
+
+##### :is用法
 
 1. 解决了html模板的限制
 
@@ -340,7 +359,7 @@ visibility:hidden 只会触发repaint，
 
 #### 
 
-#### 创建组件的方式
+##### 创建组件的方式
 
 1. Vue.extend 来创建全局的Vue组件
 2. 使用 Vue.component 创建局部组件
@@ -353,7 +372,7 @@ visibility:hidden 只会触发repaint，
 
 2. 函数组件(render函数)
 
-#### keep-alive
+##### keep-alive
 
 vue的内置组件,把一些不常变动的组件或者需要缓存的组件用`<keep-alive>`包裹起来，这样`<keep-alive>`就会帮我们把组件保存在内存中，而不是直接的销毁，这样做可以保留组件的状态或避免多次重新渲染，以提高页面性能。
 
@@ -396,18 +415,159 @@ activated和deactivated 两个钩子函数
 
 
 
-#### vuex
+##### vuex
 
 https://zhuanlan.zhihu.com/p/78981485
 
 
 
+
+
+##### vue打包优化
+
+https://baijiahao.baidu.com/s?id=1669814494837470462&wfr=spider&for=pc
+
+
+
 ### 插件
+
+#### lodash
+
+Lodash 是一个一致性、模块化、高性能的 JavaScript 实用工具库。
+
+https://www.lodashjs.com/
+
+
+
+#### webpack核心概念
+
+##### 入口(entry)
+
+##### 输出(output)
+
+##### loader
+
+​	loader让 webpack 能够去处理其他类型的文件，并将它们转换为有效 [模块](https://webpack.docschina.org/concepts/modules)，以供应用程序使用，以及被添加到依赖图中
+
+两个属性：
+
+1. `test` 属性，识别出哪些文件会被转换。
+2. `use` 属性，定义出在进行转换时，应该使用哪个 loader。
+
+```js
+module.exports = {
+  module: {
+    rules: [
+      { test: /\.css$/, use: 'css-loader' },
+      { test: /\.ts$/, use: 'ts-loader' },
+    ],
+  },
+};
+```
+
+
+
+##### 插件(plugin)
+
+​	插件目的在于解决 loader 无法实现的其他事
+
+​	webpack **插件**是一个具有 [`apply`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply) 方法的 JavaScript 对象。`apply` 方法会被 webpack compiler 调用，并且在 **整个** 编译生命周期都可以访问 compiler 对象
+
+用法:
+
+由于插件可以携带参数/选项，你必须在 webpack 配置中，向 plugins 属性传入一个 new 实例。
+
+取决于你的 webpack 用法，对应有多种使用插件的方式。
+
+```js
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack'); // 访问内置的插件
+const path = require('path');
+
+module.exports = {
+  entry: './path/to/my/entry/file.js',
+  output: {
+    filename: 'my-first-webpack.bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+  },
+  module: {
+    rules: [
+      {
+        test: /\.(js|jsx)$/,
+        use: 'babel-loader',
+      },
+    ],
+  },
+  plugins: [
+    new webpack.ProgressPlugin(),
+    new HtmlWebpackPlugin({ template: './src/index.html' }),
+  ],
+};
+```
+
+
+
+
+
+##### 模块(Modules)
+
+在[模块化编程](https://en.wikipedia.org/wiki/Modular_programming)中，开发者将程序分解为功能离散的 chunk，并称之为 **模块**。
+
+每个模块都拥有小于完整程序的体积，使得验证、调试及测试变得轻而易举
+
+ 精心编写的 **模块** 提供了可靠的抽象和封装界限，使得应用程序中每个模块都具备了条理清晰的设计和明确的目的。
+
+```txt
+Webpack 天生支持如下模块类型：
+    ECMAScript 模块
+    CommonJS 模块
+    AMD 模块
+    Assets
+    WebAssembly 模块
+```
+
+
+
+##### 模式(mode)
+
+通过选择 `development`, `production` 或 `none` 之中的一个，来设置 `mode` 参数，
+
+##### 浏览器兼容性(browser compatibility)
+
+##### 环境(environment)
 
 #### webpack
 
-​		入口
+`WebPack`本来就可以看做是模块打包机，将项目结构模块化
+
+##### webpack的面试问题
+
+https://baijiahao.baidu.com/s?id=1706629892058057497&wfr=spider&for=pc
+
+
+
+##### 前端代码打包的目的
+
+https://www.jianshu.com/p/dce4e36b4204
+
+```txt
+第一点，代码层面：
+    体积更小（Tree-Shaking 、压缩、合并），加载更快
+    编译高级语言或语法（TS、ES6+、模块化、scss）
+    兼容性和错误检查（Polyfill、postcss、eslint）
+
+第二点，研发流程方面：
+    统一、高效的开发环境
+    统一的构建流程、产出标准
+    集成公司构建规范（提测、上线等）
+```
+
+
 
 #### 中间件
 
 ​	axios
+
+#### 一些题
+
+https://www.cnblogs.com/queenya/p/13572754.html

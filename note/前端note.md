@@ -340,6 +340,34 @@ vue-loader
 父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
 ```
 
+![1646660201571](..\static\img\1646660201571.png)
+
+​	初始化patch(container, vnode)
+
+​	更新update(vnode, newVnode)
+
+##### 虚拟dom
+
+​	js对象描述dom(vnode类)
+
+​	vnode类
+
+```txt
+tag  -- 标签类型
+attrs	-- 标签属性 class id...
+children -- 子标签
+```
+
+​	虚拟dom如何转化为真是dom
+
+​			遍历vnode
+
+​			createElement(vnode.tag) 
+
+​			setAttribute(attrName,attrVal)
+
+​			遇到children递归
+
 
 
 
@@ -567,6 +595,38 @@ https://www.jianshu.com/p/dce4e36b4204
 #### 中间件
 
 ​	axios
+
+
+
+#### 性能优化
+
+浏览器输入url并会车后发生了什么
+
+https://www.baidu.com
+
+url => 统一资源定位符, 俗称网址
+
+https: 传输协议 (http和tcp之间加了一层 TSL或者SSL安全层)
+
+www: 万维网 服务器
+
+第一次访问
+
+1. 域名解析 (第一次缓存在本地)
+2. 拿到真实的IP
+3. 建立连接(TCP的三次握手)
+4. 拿到数据 渲染页面
+5. 四次挥手
+
+![1646661913350](..\static\img\1646661913350.png)
+
+
+
+浏览器渲染过程
+
+
+
+![1646661945631](..\static\img\1646661945631.png)
 
 #### 一些题
 

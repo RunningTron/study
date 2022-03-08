@@ -200,7 +200,12 @@ https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects
 
 ​	与大多数全局对象不同`Reflect`并非一个构造函数，所以不能通过[new运算符](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new)对其进行调用，或者将`Reflect`对象作为一个函数来调用。`Reflect`的所有属性和方法都是静态的（就像[`Math`](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math)对象）。
 
+用法:
 
+```
+Reflect.get(target, propertyKey[, receiver])  // 获取value
+Reflect.set(target, propertyKey, value[, receiver])  // 返回true/false
+```
 
 #### symbols 
 
@@ -277,7 +282,7 @@ https://www.cnblogs.com/polk6/p/5154470.html
 
 事件捕获: 由外而内
 
-阻止事件冒泡 事件捕获
+阻止事件冒泡(stopPropagation()) 事件捕获
 ```
 
 
@@ -385,9 +390,7 @@ children -- 子标签
 
    
 
-#### 
-
-##### 创建组件的方式
+创建组件的方式
 
 1. Vue.extend 来创建全局的Vue组件
 2. 使用 Vue.component 创建局部组件
@@ -443,6 +446,16 @@ activated和deactivated 两个钩子函数
 
 
 
+#### nextTick
+
+https://www.cnblogs.com/liuhao-web/p/8919623.html
+
+原理:
+
+使用MutationObserver (https://blog.csdn.net/weixin_45412353/article/details/107176246)
+
+
+
 ##### vuex
 
 https://zhuanlan.zhihu.com/p/78981485
@@ -487,7 +500,13 @@ module.exports = {
   module: {
     rules: [
       { test: /\.css$/, use: 'css-loader' },
-      { test: /\.ts$/, use: 'ts-loader' },
+      { test: /\.less$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'less-loader'
+        ]},
+        // 多loader 执行顺序 从后往前
     ],
   },
 };
@@ -567,6 +586,25 @@ Webpack 天生支持如下模块类型：
 #### webpack
 
 `WebPack`本来就可以看做是模块打包机，将项目结构模块化
+
+**webpack的构建流程是**
+
+```txt
+1. 初始化参数：从配置文件和 Shell 语句中读取与合并参数，得出最终的参数；
+2. 开始编译：用上一步得到的参数初始化 Compiler 对象，加载所有配置的插件，执行对象的 run 方法开始执行编译；
+3. 确定入口：根据配置中的 entry 找出所有的入口文件；
+4. 编译模块：从入口文件出发，调用所有配置的 Loader 对模块进行翻译，再找出该模块依赖的模块，再递归本步骤直到所有入口依赖的文件都经过了本步骤的处理；
+5. 完成模块编译：在经过第4步使用 Loader 翻译完所有模块后，得到了每个模块被翻译后的最终内容以及它们之间的依赖关系；
+6. 输出资源：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会；
+7. 输出完成：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统。
+	在以上过程中，Webpack 会在特定的时间点广播出特定的事件，插件在监听到感兴趣的事件后会执行特定的逻辑，并且插件可以调用 Webpack 提供的 API 改变 Webpack 的运行结果
+```
+
+
+
+
+
+
 
 ##### webpack的面试问题
 

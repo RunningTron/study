@@ -666,6 +666,30 @@ www: 万维网 服务器
 
 ![1646661945631](..\static\img\1646661945631.png)
 
+
+
+![1646829894421](..\static\img\1646829894421.png)
+
+
+
 #### 一些题
 
-https://www.cnblogs.com/queenya/p/13572754.html
+https://www.cnblogs.com/queenya/p/13572754.html86-
+
+
+
+
+
+settimeout 多个问题
+
+
+
+link import区别
+
+拖拽事件
+
+
+
+#### 学习路线
+
+![1646830779544](..\static\img\1646830779544.png)

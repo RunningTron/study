@@ -316,7 +316,12 @@ visibility:hidden 只会触发repaint，
 有些情况，比如resize窗口，改变了页面默认的字体等，对于这些操作，浏览器会马上进行relow
 ```
 
+#### link @import区别
 
+1. @import是 CSS 提供的语法规则，只有导入样式表的作用；link是HTML提供的标签，不仅可以加载 CSS 文件，还可以定义 RSS、rel 连接属性等。
+2. 加载页面时，link标签引入的 CSS 被同时加载；@import引入的 CSS 将在页面加载完毕后被加载。
+3. @import是 CSS2.1 才有的语法，故只可在 IE5+ 才能识别；link标签作为 HTML 元素，不存在兼容性问题。
+4. 可以通过 JS 操作 DOM ，插入link标签来改变样式；由于 DOM 方法是基于文档的，无法使用@import的方式插入样式。
 
 
 
@@ -684,9 +689,11 @@ settimeout 多个问题
 
 
 
-link import区别
+css3新增特效
 
-拖拽事件
+常见的浏览器兼容问题
+
+拖拽事件(https://www.jianshu.com/p/d07a623a7369)
 
 
 

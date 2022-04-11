@@ -18,6 +18,16 @@ https://www.cnblogs.com/loveyaxin/p/11151586.html
 
 
 
+
+
+
+
+
+
+
+
+
+
 #### JSON.parse JSON.stringify 深拷贝的弊端
 
 ```txt
@@ -273,6 +283,14 @@ a[mySymbol] // "Hello!"
 
 ### html
 
+
+
+#### meta标签
+
+<meta> 元素可提供有关页面的元信息（meta-information），比如针对搜索引擎和更新频度的描述和关键词。
+
+
+
 #### 事件触发流程	
 
 https://www.cnblogs.com/polk6/p/5154470.html
@@ -322,6 +340,10 @@ visibility:hidden 只会触发repaint，
 2. 加载页面时，link标签引入的 CSS 被同时加载；@import引入的 CSS 将在页面加载完毕后被加载。
 3. @import是 CSS2.1 才有的语法，故只可在 IE5+ 才能识别；link标签作为 HTML 元素，不存在兼容性问题。
 4. 可以通过 JS 操作 DOM ，插入link标签来改变样式；由于 DOM 方法是基于文档的，无法使用@import的方式插入样式。
+
+
+
+#### form表单 x-form和json??
 
 
 
@@ -642,6 +664,12 @@ https://www.jianshu.com/p/dce4e36b4204
 
 
 #### 性能优化
+
+首页优化
+
+https://m.zhipin.com/mpa/html/get/column?contentId=db578a8272fb8ef8qxB93d65&identity=0&userId=73254905
+
+
 
 浏览器输入url并会车后发生了什么
 

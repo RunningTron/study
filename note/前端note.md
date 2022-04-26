@@ -2,7 +2,35 @@
 
 ### css
 
+
+
+不能箭头函数
+
+arguement
+
+bind apply 
+
+
+
+微队列
+
+宏队列
+
 ### js
+
+
+
+#### postMessage MessageChannel5
+
+​	不同窗口间通信
+
+####  JSBridge
+
+​	JavaScript 提供调用 [Native](https://so.csdn.net/so/search?q=Native&spm=1001.2101.3001.7020) 功能的接口
+
+https://blog.csdn.net/yuzhengfei7/article/details/93468914
+
+
 
 #### 原型和原型链
 
@@ -46,6 +74,10 @@ https://www.cnblogs.com/loveyaxin/p/11151586.html
 ​	promise es6  promise a+ 规范 
 
 ```txt
+三种状态:
+	Pending
+	Fulfilled(Resolved)
+	Rejected
 静态方法
 	all(等所有resolve的返回 如果有一个报错就返回该报错) 
 	race(任意一个返回就返回 不论是成功还是失败) 

@@ -1,0 +1,1 @@
+(()=>{let e=document.querySelector("#app"),t=document.createElement("p");t.innerText="hello ts",e.appendChild(t)})();
